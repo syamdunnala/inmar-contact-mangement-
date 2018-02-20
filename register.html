@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+           <meta charset="utf-8">
+           <!--for edge-->
+           <meta http-equiv="X-UA-Compatible" content="IE=edge">
+           <meta name="viewport" content="width=device-width, initial-scale=1">
+           <title>INMAR</title>
+          
+           <!--animations-->
+            <link rel="stylesheet" type="text/css" href="css/animate.css">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <!-- Custom CSS -->
+            <link href="css/custom.css" rel="stylesheet">
+             <!-- Custom js -->
+            <script src="js/custom.js"></script>           
+           
+</head>
+<body>
+<div class="container-fluid regform">
+     <div class="row">
+    <div class="col-xs-12 col-md-4 col-sm-4 c3 animated fadeInDown">
+                     <div class="reg">
+                     <h2>Register</h2>
+                    </div><br>
+                    <form action="admin.php" id="form1" method="post">
+                    <div class="form-group">
+                          <label for="fname">fname:<span class="star">*</span></label>
+                          <span id="infname"></span>
+                          <input type="text" class="form-control" id="fname" name="fname">
+                    </div>
+                     <div class="form-group">
+                          <label for="Ph.No">Ph.no:<span class="star">*</span></label>
+                          <span id="inphno"></span>
+                          <input type="text" class="form-control" id="phno" name="phno" maxlength="10" >
+                    </div>
+                    <div class="form-group">
+                          <label for="email">Email:<span class="star">*</span></label>
+                          <span id="inmail"></span>
+                          <input type="email" class="form-control" id="email" name="email" >
+
+                      <div class="form-group">
+                          <label for="aadhar">aadhar:<span class="star">*</span></label>
+                          <span id="inaadhar"></span>
+                          <input type="text" class="form-control" id="aadhar" name="aadhar" maxlength="12">
+
+                    <div class="form-group">
+                          <label for="pwd">Password:<span class="star">*</span></label>
+                          <span id="inpswd1"></span>
+                          <input type="password" class="form-control" id="pwd1" name="pwd1">
+
+                    <div class="form-group">
+                           <label for="pwd">Confirm Password:<span class="star">*</span></label>
+                           <span id="inpswd2"></span>
+                          <input type="password" class="form-control" id="pwd2" name="pwd2">
+                  </div>
+                    </div>
+                    <button type="button" id="bt1" class="btn btn-success btn-md">Submit</button><br>
+                  </form>
+       </div>  
+    </div>
+</div> 
+</body>
+</html>
