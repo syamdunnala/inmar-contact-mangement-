@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>dashboard</title>
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -153,7 +153,7 @@
                          //v.message = data; 
                          //alert(JSON.stringify(data));
                          v.collect=data;
-                         //alert("Group created successfully");
+                         alert("contact added");
                          v.onpageload();
                      } 
                  ); 
@@ -217,19 +217,63 @@
              }
        });
      
+       /* all contacts*/
+        app.service("retrieve_allcontacts",function($http){
+            this.storeall=function(v){
+                      alert("hai");
+                
+                     var request = $http({ 
+                     method: "post", 
+                     url: "display_allcontacts.php", 
+                     headers:{'content-type':'application/x-www-form-urlencoded'}, 
+                     transformRequest: function(obj) {
+                                                  var str = [];
+                                                  for(var p in obj)
+                                                  {
+                                                        //console.log(p);
+                                                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                                                  }                                                      
+                                                  //alert(str.join("&"));
+                                                    return str.join("&");
+                                            },
+                     data: { 
+                         
+                         //gid:group_id
+                         
+                     } 
+                 }); 
+  
+                 // Store the data-dump of the FORM scope. 
+                 request.success( 
+                     function( data ) { 
+
+                         //v.message = data; 
+                         alert(JSON.stringify(data));
+                         v.collect_all_contacts=data;
+                         $("#all_contact_info_model").modal('show');
+                         //v.collect=data;
+                         //alert("Group created successfully");
+                         //v.onpageload();
+                     } 
+                 ); 
+
+
+            }
+       });
 
        app.service("collect_group_info",function($http){
              this.get_group_info=function(v){
-
+                  
                   $http.get("send_group_info.php")
                     .then(function(response) {
                         v.collect = response.data;
-                        //alert(collect);
                         //alert(JSON.stringify(v.collect));
                     });
              }
        });
-       app.controller("app_con",function($scope,send_group_details,collect_group_info,add_contact,retrieve_contact){
+     
+
+       app.controller("app_con",function($scope,send_group_details,collect_group_info,add_contact,retrieve_contact,retrieve_allcontacts){
             $scope.g_name="";
             $scope.contact_name="";
             $scope.phone="";
@@ -238,6 +282,7 @@
             $scope.collect="";
             $scope.temp_group_id="";
             $scope.collect_contacts="";
+            $scope.collect_all_contacts="";
             $scope.send=function(){
                //alert("hai");
                send_group_details.send_details($scope);
@@ -250,6 +295,11 @@
             $scope.getcontact=function(group_id){
                 console.log(group_id);
                 retrieve_contact.store($scope,group_id);
+            }
+             $scope.view_all_contacts=function(){
+                //console.log(group_id);
+                console.log("hai");
+                retrieve_allcontacts.storeall($scope);
             }
             $scope.contact=function(){
                  //alert("hai");
@@ -307,7 +357,7 @@
     <ul class="nav navbar-nav">
 
       <li class="active" onclick="delcookie()"><a href="#">Logout</a></li>
-      <li><a href="#">view contacts</a></li>
+      <li><a href="#" ng-click="view_all_contacts()">view contacts</a></li>
       <li><a href="#">edit</a></li>
            </ul>
     <form class="navbar-form navbar-left" action="/action_page.php">
@@ -422,6 +472,41 @@
     </div>
   </div>
 </div>
+  
+  <!--display allcontacts model-->
+<div class="container-fluid">
+       <!-- Modal1 -->
+  <div class="modal fade" id="all_contact_info_model" role="dialog">
+    <div class="modal-dialog">    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" align="center" >Create contact</h4>
+        </div>
+        <div class="modal-body">
+             <table class="table table-striped">
+                 <tr>
+                     <th>Name</th>
+                     <th>PhoneNumber</th>
+                     <th>EmailId</th>
+                 </tr>
+                 <tr ng-repeat="x in collect_all_contacts">
+                     <td>{{x.contact_name}}</td>
+                     <td>{{x.phone_number}}</td>
+                     <td>{{x.contact_mail}}</td>
+                 </tr>
+             </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="">close</button>
+        </div>
+      </div> 
+    </div>
+  </div>
+</div>
+
+
 
       <!--modal display -->
 <div class="container-fluid group_section">
