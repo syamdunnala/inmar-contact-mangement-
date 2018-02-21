@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2018 at 03:42 PM
+-- Generation Time: Feb 21, 2018 at 07:31 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -76,7 +76,20 @@ INSERT INTO `contact_info` (`owner`, `group_id`, `contact_name`, `phonenumber`, 
 ('ahmed@inmar.com', '123', 'mine', '1234456789', 'erme@inmar.com'),
 ('ahmed@inmar.com', '123', 'sandeep', 'jbfejwfbrjkm', 'jbdjkfrejkd'),
 ('ahmed@inmar.com', '123', 'raj', '7896541235', 'raj@inmar.com'),
-('saym@inmar.com', '12345', 'nsbvhadn', 'mmbdwjs', 'bdjcx mjd');
+('saym@inmar.com', '12345', 'nsbvhadn', 'mmbdwjs', 'bdjcx mjd'),
+('syam@inmar.com', '12099', '', '', ''),
+('syam@inmar.com', '12099', 'b vb', 'jb n', 'n n n'),
+('syam@inmar.com', '12099', 'b', 'b b', 'b b  bb  b'),
+('syam@inmar.com', '12099', 'n n ed', 'n gtrn fdv', 'n erfdvn cgfn v'),
+('syam@inmar.com', '12099', 'n n ed', 'n gtrn fdv', 'n erfdvn cgfn v'),
+('syam@inmar.com', '12099', 'n n swq', 'dxdxed', 'n erfdvn cgfn v'),
+('syam@inmar.com', '12099', 'n n swq', 'dxdxed', 'n erfdvn cgfn v'),
+('syam@inmar.com', '543', 'n n swq', 'dxdxed', 'n erfdvn cgfn v'),
+('syam@inmar.com', '1234n', '', '', ''),
+('ravi@inmar.com', '312', 'ravi12', '123456789', 'ramwer@inmar.com'),
+('ravi@inmar.com', '312', 'bda', '23456789', 'fhftcg'),
+('ravi@inmar.com', '312', 'bda', '23456789', 'fhftcg'),
+('ravi@inmar.com', '312', 'n n', 'm', 'kmnkm');
 
 -- --------------------------------------------------------
 
@@ -103,7 +116,10 @@ INSERT INTO `group_inf` (`owner_email`, `group_id`, `group_name`) VALUES
 ('email', '1233', 'msd'),
 ('', '1234', 'ms'),
 ('saym@inmar.com', '12345', 'sand'),
+('syam@inmar.com', '1234n', 'sandeeep'),
 ('saym@inmar.com', '2334', 'sandeep'),
+('ravi@inmar.com', '312', 'se'),
+('ravi@inmar.com', '412', 'php'),
 ('syam@inmar.com', '543', 'inox'),
 ('namjsh@inmar.com', '6547', 'agss'),
 ('dunnala@inmar.com', 'qwer', 'anna');
@@ -117,7 +133,8 @@ INSERT INTO `group_inf` (`owner_email`, `group_id`, `group_name`) VALUES
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`email`),
-  ADD UNIQUE KEY `name` (`name`);
+  ADD UNIQUE KEY `name` (`name`),
+  ADD UNIQUE KEY `name_2` (`name`);
 
 --
 -- Indexes for table `group_inf`
