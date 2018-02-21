@@ -1,5 +1,5 @@
 # inmar-contact-mangement-
-The application basically  for managing contacts in groups  
+The application basically useful for managing the inamr employee contacts.
 
 ### Pre requisites
 
@@ -28,7 +28,7 @@ step 1: If you are a new user click to register otherwise login with your valid 
 step 2: After successful login it redirects to the corresponding dashboard page.(cookie is created here in \*login.php*\, mail is my cookie value and test 2 is my cookie name)
 step 3: Click the plus button to create a new group (created groups are displayed in the  dashboard page)
  it fires the group_create.php file and stores the details in the  the group_inf table and display the required details in the corresponding page by firing \*send_group_info.php file8*\   
-step 4: Add contacts in the repective groups by clicking add contact button (it fires the \*store_contact.php*\         stores the details in the contact_info table)
+step 4: Add contacts in the repective groups by clicking add contact button (it fires the \*store_contact.php*\ and stores the details in the contact_info table)
 step 5: User can view the contact details by clicking view contacts 
 step 6: User can also view the all contacts by clicking view all contacts
 step 7: After performing the operations the user can logout.
@@ -41,4 +41,8 @@ step 7: After performing the operations the user can logout.
 * [PHP5]                   - SERVER SIDE PROGRAMMING
 * [sql]                    - QUERY LANGUAGE
 
+## Author
 
+ SYAM SANDEEP DUNNALA    
+ email id: syamsandeep13@gmail.com
+ mobile number:9676931355
