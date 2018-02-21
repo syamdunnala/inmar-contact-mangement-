@@ -1,21 +1,22 @@
 <?php
 
-        $data1=array();
-        //$gid=$_POST['gid'];
+$data1=array();
+        $gid=$_POST['gid'];
         $owner_email=$_COOKIE['test2'];
-        //echo "  $owner_email   hai";
+        echo "$gid    $owner_email   hai";
 		$conn = new mysqli('localhost', 'root', '', 'inmar');
 
+		 				
 		 if ($conn->connect_error) {
 		    die("Connection failed: " . $conn->connect_error);
 		 } 
-		 $sql = "SELECT * FROM contact_info WHERE owner='$owner_email'";
+		 $sql = "SELECT * FROM contact_info WHERE owner='$owner_email'and group_id='$gid'";
 		 $result = $conn->query($sql);
 		 if ($result->num_rows >0) 
 		 {
 		    
 		    while($row = $result->fetch_assoc()) {
-		        array_push($data1,array('contact_name'=>$row['contact_name'],'phone_number'=>$row['phonenumber'],'contact_mail'=>$row['contact_email'],'grp_id'=>$row['group_id']));
+		        array_push($data1,array('contact_name'=>$row['contact_name'],'phone_number'=>$row['phonenumber'],'contact_mail'=>$row['contact_email']));
 		    }
 		 } else 
 		 {

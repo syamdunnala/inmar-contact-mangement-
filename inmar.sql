@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2018 at 07:31 AM
+-- Generation Time: Feb 21, 2018 at 06:51 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -40,10 +40,10 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`name`, `ph.no`, `email`, `aadhar`, `password`, `cpassword`) VALUES
-('', 0, '', '', '', ''),
 ('ahmed khaja has', 1234567890, 'ahmed@inmar.com', '87654345678', 'aA12345678', 'aA12345678'),
 ('dunnala12', 2147483647, 'dunnala@inmar.com', '789456123654', 'dunnala123S', 'dunnala123S'),
 ('gai@1234', 2147483647, 'gai@inmar.com', '7896541236', 'gai123GAI', 'gai123GAI'),
+('inmar123', 2147483647, 'inmar@inmar.com', '789654123654', 'inmar123Q', 'inmar123Q'),
 ('deekshith', 2147483647, 'namjsh@inmar.com', '7815115154', 'aGss123@', 'aGss123@'),
 ('raidu1234', 2147483647, 'raidu@inmar.com', '78965412365', 'raidu123AUTO', 'raidu123AUTO'),
 ('ram12345', 2147483647, 'ram@inmar.com', '789654123654', 'ram123ASD', 'ram123ASD'),
@@ -71,25 +71,7 @@ CREATE TABLE `contact_info` (
 --
 
 INSERT INTO `contact_info` (`owner`, `group_id`, `contact_name`, `phonenumber`, `contact_email`) VALUES
-('ahmed@inmar.com', '123', 'ram', '1234567890', '0'),
-('ahmed@inmar.com', '123', 'sandeep', '7896541235', '0'),
-('ahmed@inmar.com', '123', 'mine', '1234456789', 'erme@inmar.com'),
-('ahmed@inmar.com', '123', 'sandeep', 'jbfejwfbrjkm', 'jbdjkfrejkd'),
-('ahmed@inmar.com', '123', 'raj', '7896541235', 'raj@inmar.com'),
-('saym@inmar.com', '12345', 'nsbvhadn', 'mmbdwjs', 'bdjcx mjd'),
-('syam@inmar.com', '12099', '', '', ''),
-('syam@inmar.com', '12099', 'b vb', 'jb n', 'n n n'),
-('syam@inmar.com', '12099', 'b', 'b b', 'b b  bb  b'),
-('syam@inmar.com', '12099', 'n n ed', 'n gtrn fdv', 'n erfdvn cgfn v'),
-('syam@inmar.com', '12099', 'n n ed', 'n gtrn fdv', 'n erfdvn cgfn v'),
-('syam@inmar.com', '12099', 'n n swq', 'dxdxed', 'n erfdvn cgfn v'),
-('syam@inmar.com', '12099', 'n n swq', 'dxdxed', 'n erfdvn cgfn v'),
-('syam@inmar.com', '543', 'n n swq', 'dxdxed', 'n erfdvn cgfn v'),
-('syam@inmar.com', '1234n', '', '', ''),
-('ravi@inmar.com', '312', 'ravi12', '123456789', 'ramwer@inmar.com'),
-('ravi@inmar.com', '312', 'bda', '23456789', 'fhftcg'),
-('ravi@inmar.com', '312', 'bda', '23456789', 'fhftcg'),
-('ravi@inmar.com', '312', 'n n', 'm', 'kmnkm');
+('', 'inmar123', 'employe1', '9676931355', 's@inmar.com');
 
 -- --------------------------------------------------------
 
@@ -122,7 +104,9 @@ INSERT INTO `group_inf` (`owner_email`, `group_id`, `group_name`) VALUES
 ('ravi@inmar.com', '412', 'php'),
 ('syam@inmar.com', '543', 'inox'),
 ('namjsh@inmar.com', '6547', 'agss'),
-('dunnala@inmar.com', 'qwer', 'anna');
+('inmar@inmar.com', 'inmar123', 'inmar'),
+('dunnala@inmar.com', 'qwer', 'anna'),
+('inmar@inmar.com', 'qwerty', 'employ');
 
 --
 -- Indexes for dumped tables
@@ -135,6 +119,12 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`email`),
   ADD UNIQUE KEY `name` (`name`),
   ADD UNIQUE KEY `name_2` (`name`);
+
+--
+-- Indexes for table `contact_info`
+--
+ALTER TABLE `contact_info`
+  ADD PRIMARY KEY (`contact_email`);
 
 --
 -- Indexes for table `group_inf`

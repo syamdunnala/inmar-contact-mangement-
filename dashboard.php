@@ -20,6 +20,7 @@
      (function(){
               
           var email= getCookie("test2");
+          //document.getElementById("incookie").innerHTML="email";
           alert("welcome to dashboard "+email);
           var c=document.cookie;
           var mytest1=c.split(';');
@@ -37,7 +38,7 @@
           else
           {
             console.log(document.cookie);
-           window.location.assign("login.html");
+           window.location.assign("index.html");
 
             }
      }());
@@ -73,9 +74,6 @@
           
 
      }
-    
-    
-     
         var mail=getCookie("test2");
         //alert(mail);
 
@@ -206,6 +204,93 @@
             }
        });
 
+      /*--edit--*/
+       app.service("ed_contact",function($http){
+            this.store=function(v,grp_id){
+                    alert("hai");
+                     var request = $http({ 
+                     method: "post", 
+                     url: "edit_contact.php", 
+                     headers:{'content-type':'application/x-www-form-urlencoded'}, 
+                     transformRequest: function(obj) {
+                                                  var str = [];
+                                                  for(var p in obj)
+                                                  {
+                                                        //console.log(p);
+                                                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                                                  }                                                      
+                                                  //alert(str.join("&"));
+                                                    return str.join("&");
+                                            },
+                     data: { 
+                         
+                         gid: grp_id
+                     } 
+                 }); 
+  
+                 // Store the data-dump of the FORM scope. 
+                 request.success( 
+                     function( data ) { 
+
+                         //v.message = data; 
+                         alert(JSON.stringify(data));
+                         v.e_collect=data;
+                         alert("contact is back");
+                         $("#edit_info_model").modal('show');
+                         
+                     } 
+                 ); 
+
+
+            }
+       });
+       
+
+    /*  app.service("retrieve_contact",function($http){
+            this.store=function(v,group_id){
+                      //alert("group id:"+group_id);
+                
+                     var request = $http({ 
+                     method: "post", 
+                     url: "display_contact.php", 
+                     headers:{'content-type':'application/x-www-form-urlencoded'}, 
+                     transformRequest: function(obj) {
+                                                  var str = [];
+                                                  for(var p in obj)
+                                                  {
+                                                        //console.log(p);
+                                                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                                                  }                                                      
+                                                  //alert(str.join("&"));
+                                                    return str.join("&");
+                                            },
+                     data: { 
+                         
+                         gid:group_id
+                         
+                     } 
+                 }); 
+  
+                 // Store the data-dump of the FORM scope. 
+                 request.success( 
+                     function( data ) { 
+
+                         //v.message = data; 
+                         //alert(JSON.stringify(data));
+                         v.collect_contacts=data;
+                         $("#contact_info_model").modal('show');
+                         //v.collect=data;
+                         //alert("Group created successfully");
+                         //v.onpageload();
+                     } 
+                 ); 
+
+
+            }
+       });
+
+      */
+
        app.service("collect_group_info",function($http){
              this.get_group_info=function(v){
                   
@@ -246,7 +331,52 @@
                  // Store the data-dump of the FORM scope. 
                  request.success( 
                      function( data ) { 
-s
+
+                         //v.message = data; 
+                         alert(JSON.stringify(data));
+                        //alert(data);
+                         v.collect_all_contacts=data;
+                         $("#all_contact_info_model").modal('show');
+                         //v.collect=data;
+                         //alert("Group created successfully");
+                         //v.onpageload();
+                     } 
+                 ); 
+
+
+            }
+       });
+        /*delete contac*/
+        
+        app.service("del_contact",function($http){
+            this.store=function(v,contact_name){
+                      alert("hai");
+                
+                     var request = $http({ 
+                     method: "post", 
+                     url: "del_contact.php", 
+                     headers:{'content-type':'application/x-www-form-urlencoded'}, 
+                     transformRequest: function(obj) {
+                                                  var str = [];
+                                                  for(var p in obj)
+                                                  {
+                                                        //console.log(p);
+                                                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                                                  }                                                      
+                                                  //alert(str.join("&"));
+                                                    return str.join("&");
+                                            },
+                     data: { 
+                         
+                         cname:contact_name
+                         
+                     } 
+                 }); 
+  
+                 // Store the data-dump of the FORM scope. 
+                 request.success( 
+                     function( data ) { 
+
                          //v.message = data; 
                          alert(JSON.stringify(data));
                          v.collect_all_contacts=data;
@@ -261,6 +391,7 @@ s
             }
        });
 
+
        app.service("collect_group_info",function($http){
              this.get_group_info=function(v){
                   
@@ -273,7 +404,7 @@ s
        });
      
 
-       app.controller("app_con",function($scope,send_group_details,collect_group_info,add_contact,retrieve_contact,retrieve_allcontacts){
+       app.controller("app_con",function($scope,send_group_details,collect_group_info,add_contact,retrieve_contact,retrieve_allcontacts,del_contact,ed_contact){
             $scope.g_name="";
             $scope.contact_name="";
             $scope.phone="";
@@ -283,6 +414,7 @@ s
             $scope.temp_group_id="";
             $scope.collect_contacts="";
             $scope.collect_all_contacts="";
+            //$scope.collect_rem_contacts="";
             $scope.send=function(){
                //alert("hai");
                send_group_details.send_details($scope);
@@ -309,7 +441,18 @@ s
                 $scope.temp_group_id=tempid;
                 //console.log($scope.temp_group_id);
             }
+            $scope.delete_contact=function(contact_name)
+            {
+              console.log(contact_name);
+              del_contact.store($scope,contact_name);
+            }
+            $scope.edit_contact=function(grp_id)
+            {
+              console.log(grp_id);
+              ed_contact.store($scope,grp_id);
+            }
        });
+       
     </script>
    <style>
       .create_group 
@@ -345,6 +488,9 @@ s
         font-size: 20px;
 
       }
+      .profile{
+        margin-left: 100%;
+      }
      
     </style>
 </head>
@@ -360,20 +506,21 @@ s
       <li><a href="#" ng-click="view_all_contacts()">view  all contacts</a></li>
       <li><a href="#">edit</a></li>
            </ul>
-    <form class="navbar-form navbar-left" action="/action_page.php">
+    <form class="navbar-form navbar-left" action="">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Search" name="search">
         <div class="input-group-btn">
           <button class="btn btn-default" type="submit">
             <i class="glyphicon glyphicon-search"></i>
           </button>
-
+         <img src="img/profile.png"  class="profile" width="30px">
+         
         </div>
       </div>
     </form>
   </div>
 </nav>
-
+     
 <div class="create_group">
    <a href="#"  data-toggle="modal" data-target="#myModal"><img src="img/addButton.png" width="80" height="80"></a>   
 </div>
@@ -407,6 +554,41 @@ s
   </div>
 </div>
 
+  
+    <div class="container-fluid">
+       <!-- Modal -->
+  <div class="modal fade" id="edit_info_model" role="dialog">
+    <div class="modal-dialog">    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4  class="modal-title" align="center">edit contact</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+              <label >contact Name:</label>
+              <input type="text" class="form-control" id="g_name" ng-model="g_name" required>
+            </div>
+            <div class="modal-body">
+              <label >phone number:</label>
+              <input type="text" class="form-control" id="g_id" ng-model="g_id" required>
+            </div>
+        </div>
+         <div class="modal-body">
+              <label >email id:</label>
+              <input type="text" class="form-control" id="g_id" ng-model="g_id" required>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="send()">Create</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
 
 <div class="container-fluid">
        <!-- contact Modal1 -->
@@ -421,15 +603,15 @@ s
         <div class="modal-body">
             <div class="form-group">
               <label >contact Name:</label>
-              <input type="text" class="form-control"  ng-model="contact_name">
+              <input type="text" class="form-control"  ng-model="contact_name" required>
             </div>
             <div class="form-group">
               <label >phone number:</label>
-              <input type="text" class="form-control" ng-model="phone">
+              <input type="text" class="form-control" ng-model="phone" required>
             </div>
             <div class="form-group">
               <label >email id:</label>
-              <input type="text" class="form-control"  ng-model="mail_id">
+              <input type="text" class="form-control"  ng-model="mail_id" required>
             </div>
         </div>
         <div class="modal-footer">
@@ -449,7 +631,7 @@ s
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" align="center" >Create contact</h4>
+          <h4 class="modal-title" align="center" >View Contact contact</h4>
         </div>
         <div class="modal-body">
              <table class="table table-striped">
@@ -482,7 +664,7 @@ s
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" align="center" >Create contact</h4>
+          <h4 class="modal-title" align="center" >View all contact</h4>
         </div>
         <div class="modal-body">
              <table class="table table-striped">
@@ -490,11 +672,17 @@ s
                      <th>Name</th>
                      <th>PhoneNumber</th>
                      <th>EmailId</th>
+                     <th>Delete</th>
+                     <th>Edit</th>
                  </tr>
-                 <tr ng-repeat="x in collect_all_contacts">
-                     <td>{{x.contact_name}}</td>
-                     <td>{{x.phone_number}}</td>
-                     <td>{{x.contact_mail}}</td>
+                 <tr ng-repeat="y in collect_all_contacts">
+                     <td>{{y.contact_name}}</td>
+                     <td>{{y.phone_number}}</td>
+                     <td>{{y.contact_mail}}</td>
+                     <td><a class="btn" data-toggle="tooltip" data-placement="top" title="delete contact!" ng-click="delete_contact(y.contact_name)" data-toggle="modal" data-target=""><img src="img/Delete-group-icon.png" width="20" height="20"></a>
+                     </td>
+                     <td>
+                     <a class="btn" data-toggle="tooltip" ng-click="edit_contact(y.grp_id)" data-placement="top" title="edit contact!"   data-toggle="modal" data-target=""><img src="img/edit.png" width="20" height="20"></a></td>
                  </tr>
              </table>
         </div>
