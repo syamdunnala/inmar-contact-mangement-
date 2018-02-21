@@ -246,7 +246,7 @@
                  // Store the data-dump of the FORM scope. 
                  request.success( 
                      function( data ) { 
-
+s
                          //v.message = data; 
                          alert(JSON.stringify(data));
                          v.collect_all_contacts=data;
@@ -357,7 +357,7 @@
     <ul class="nav navbar-nav">
 
       <li class="active" onclick="delcookie()"><a href="#">Logout</a></li>
-      <li><a href="#" ng-click="view_all_contacts()">view contacts</a></li>
+      <li><a href="#" ng-click="view_all_contacts()">view  all contacts</a></li>
       <li><a href="#">edit</a></li>
            </ul>
     <form class="navbar-form navbar-left" action="/action_page.php">
