@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/angular.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" CONTENT="-1">
   <?php
@@ -43,7 +44,7 @@
             }
      }());
 
-     function getCookie(cname) {
+    function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
@@ -70,6 +71,7 @@
         document.cookie = mytest1[0]+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         document.cookie = mytest1[1]+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         alert("close");
+        alert(v1+" "+v2);
         window.location.assign("logout.php?p1="+v1+"&p2="+v2);
           
 
@@ -413,6 +415,7 @@
             $scope.collect="";
             $scope.temp_group_id="";
             $scope.collect_contacts="";
+            $scope.e_collect="";
             $scope.collect_all_contacts="";
             //$scope.collect_rem_contacts="";
             $scope.send=function(){
@@ -445,6 +448,7 @@
             {
               console.log(contact_name);
               del_contact.store($scope,contact_name);
+              //$scope.view_all_contacts()
             }
             $scope.edit_contact=function(grp_id)
             {
@@ -504,7 +508,7 @@
 
       <li class="active" onclick="delcookie()"><a href="#">Logout</a></li>
       <li><a href="#" ng-click="view_all_contacts()">view  all contacts</a></li>
-      <li><a href="#">edit</a></li>
+      
            </ul>
     <form class="navbar-form navbar-left" action="">
       <div class="input-group">
@@ -522,7 +526,7 @@
 </nav>
      
 <div class="create_group">
-   <a href="#"  data-toggle="modal" data-target="#myModal"><img src="img/addButton.png" width="80" height="80"></a>   
+   <a href="#"  data-toggle="modal" data-target="#myModal"><img src="img/addButton.png" class="animated fadeInDown" width="80" height="80"></a>   
 </div>
 
 <div class="container-fluid">
@@ -568,7 +572,7 @@
         <div class="modal-body">
             <div class="form-group">
               <label >contact Name:</label>
-              <input type="text" class="form-control" id="g_name" ng-model="g_name" required>
+              <input type="text" class="form-control" id="g_name" ng-model="g_name" value="{{e_collect.contact_name}}" required>
             </div>
             <div class="modal-body">
               <label >phone number:</label>
@@ -581,7 +585,7 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="send()">Create</button>
+          <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="send()">Save</button>
         </div>
       </div>
       
@@ -682,7 +686,7 @@
                      <td><a class="btn" data-toggle="tooltip" data-placement="top" title="delete contact!" ng-click="delete_contact(y.contact_name)" data-toggle="modal" data-target=""><img src="img/Delete-group-icon.png" width="20" height="20"></a>
                      </td>
                      <td>
-                     <a class="btn" data-toggle="tooltip" ng-click="edit_contact(y.grp_id)" data-placement="top" title="edit contact!"   data-toggle="modal" data-target=""><img src="img/edit.png" width="20" height="20"></a></td>
+                     <a class="btn" data-toggle="tooltip" data-dismiss="modal" ng-click="edit_contact(y.grp_id)" data-placement="top" title="edit contact!"   data-toggle="modal" data-target=""><img src="img/edit.png" width="20" height="20"></a></td>
                  </tr>
              </table>
         </div>
